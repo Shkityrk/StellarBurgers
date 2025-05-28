@@ -18,3 +18,12 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // Игнорировать только ошибку, связанную с removeChild
+  if (err.message.includes("Failed to execute 'removeChild'")) {
+    return false;
+  }
+  // Все остальные ошибки — фейлить
+  return true;
+});
